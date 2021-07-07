@@ -19,7 +19,7 @@ import AuthenticateUser from './AuthenticateUser';
 
         return (
             <div>
-                <h1> Login Successful {userState.state.user} </h1>
+                <h1> Login Successful {userState.state.user} ! </h1>
                 <button onClick =  {handleLogout} >Logout</button>
              </div>
         )
