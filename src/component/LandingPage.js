@@ -1,6 +1,7 @@
 import React from 'react';
 import {useHistory} from 'react-router';
 import AuthenticateUser from './AuthenticateUser';
+import Notes from './Notes';
 
 
  const LandingPage = (props) =>{
@@ -13,14 +14,23 @@ import AuthenticateUser from './AuthenticateUser';
         AuthenticateUser.logout();
         history.push(`/`, {state:{loggedIn: !userState.state.isLoggedIn}});
     }
-   
+    
 
    
 
         return (
             <div>
-                <h1> Login Successful {userState.state.user} ! </h1>
-                <button onClick =  {handleLogout} >Logout</button>
+                <div className="controls">
+                    <button onClick =  {handleLogout} >Logout</button>
+                </div>
+                <div className="notes-list">
+                    <Notes/>
+                    <Notes/>
+                    <Notes/>
+                    <Notes/>
+                    <Notes/>
+                </div>
+                
              </div>
         )
     
