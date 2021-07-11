@@ -1,21 +1,11 @@
-const Notes = ()=>{
-    let date= new Date();
-    let dd = date.getDate();
-    let mm = date.getMonth()+1;
-    let year =  date.getFullYear();
 
-    if(mm <10){
-        mm = "0"+mm
-    }
-
-    let today = dd+"/"+mm+"/"+year;
-
+const Notes = ({id, text, date, handleDeleteNote})=>{
     return ( 
         <div className="note">
-            <p>this is a note</p>
-            <div className="note-footer">
-                <small>{today}</small>
-                <i className="fas fa-trash-alt"></i>
+           <span>{text}</span>
+            <div className="note-footer">    
+                <small>{date}</small>
+                <i className="fas fa-trash-alt" onClick={()=>handleDeleteNote(id)}></i>
             </div>
 
         </div>

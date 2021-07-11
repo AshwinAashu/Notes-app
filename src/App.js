@@ -9,7 +9,7 @@ import Reset from './component/Reset';
 
 
 
-function App() {
+const App = () => {
   
   
 
@@ -21,12 +21,18 @@ function App() {
           <Route exact path="/" component={Login}/> 
           <Route exact path="/register" component={Register}/>
         
-          <Route 
+          {/* <Route 
            path="/profile/:name" 
            render= {(props)=> (
              <LandingPage {...props}  />
-           )}/>
+           )}/>  */}
            
+           <Route 
+           path ="/profile/:name"
+           render = { ({user, isLoggedIn}) => (
+            <LandingPage user= {user} isLoggedIn={isLoggedIn}/>
+           )}/>
+
           <Route exact path="/reset" component={Reset}/>
           
 

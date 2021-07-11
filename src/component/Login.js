@@ -1,6 +1,7 @@
 import React, { Component} from 'react';
 import  axios from 'axios';
 import AuthenticateUser from './AuthenticateUser';
+// import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 class Login extends Component {
     constructor(props){
@@ -14,8 +15,7 @@ class Login extends Component {
        this.pswHandler =  this.pswHandler.bind(this);
        this.submitHandler = this.submitHandler.bind(this);
     }
-
-    //lifecycle  methods 
+ 
 
 
     //event handlers 
@@ -44,6 +44,7 @@ class Login extends Component {
             if(LOCAL_DATA.password === res.data.password){
                 //set loggedin to true
                 this.setState({loggedIn: true});
+                console.log(this.state.loggedIn);
                 this.props.history.push( `/profile/${LOCAL_DATA.user}`, {state : {user: LOCAL_DATA.user, isLoggedIn: this.state.loggedIn }});
                 AuthenticateUser.registerUser(LOCAL_DATA.user, LOCAL_DATA.password);
             }
@@ -53,8 +54,8 @@ class Login extends Component {
     }
     render(){
         return(
-            <div>
-               
+            <div className="login">
+                
                 <h1>Login to continue</h1>
                 <form onSubmit = {this.submitHandler}>
                     <input onChange = { this.emailHandler } type="email" value={this.state.email} className="emailform" placeholder="abc@xyz.com"/>  <br/>
