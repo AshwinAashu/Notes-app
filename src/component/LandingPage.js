@@ -2,17 +2,26 @@ import React, {useState} from 'react';
 import {useHistory} from 'react-router';
 import AuthenticateUser from './AuthenticateUser';
 import NotesList from './NotesList';
-import { nanoid } from 'nanoid';
 import Search from './Search';
+import axios from 'axios'; 
 
- const LandingPage = (user, isLoggedIn) =>{
-    // const userState = props.location.state;
+ const  LandingPage = async ({user, isLoggedIn}) =>{
+    
    
-    const history = useHistory();
+    const history = useHistory();  
+    const [notes, setNotes] = useState([]);
+    //retrieve user notes 
   
-    const [notes, setNotes] = useState([
-       
-    ]);
+    const userNotes  = await axios.get(`http://localhost:9090/profile/notes?username=${user}`)
+                            .then( response => console.log(response.data))
+                            .catch(error => console.log(error));
+   
+    console.log(user);
+    console.log(isLoggedIn);    
+    // console.log(userNotes);
+    
+
+
 
     const deleteNote = (id) =>{
         const newNotes = notes.filter((note)=>note.id !== id);
@@ -22,15 +31,23 @@ import Search from './Search';
     const [searchText, setSearchText] = useState('');
 	const [darkMode, setDarkMode] = useState(false);
 
+    //when you add a note
     const addNote = (text) => {
         const date = new Date();
         const newNote ={
-            id : nanoid(),
+            id : Math.random() * 100000,
             text : text, 
-            date : date.toDateString()    
+            timestamp : date.toDateString(),
+            username : user
         }
+        setNotes(userNotes);
         const newNotes = [...notes, newNote];
+        const allNotes = [...newNotes, ...userNotes];
         setNotes(newNotes);
+        //write axios post reqquest and parse the note and the user to the database
+        axios.post(`http://localhost:9090/profile/notes`, {newNote})
+            .then( res =>  console.log(res))
+            .catch((e)=>console.log(e));   
     }
 
 
@@ -45,7 +62,6 @@ import Search from './Search';
     const toggleDarkHandle = ()=>{
         let darkness = darkMode;
         setDarkMode(!darkness);
-        console.log(darkMode);
     }
 
    

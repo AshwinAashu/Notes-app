@@ -4,10 +4,12 @@ const NotesList =({notes, handleAddNote, handleDeleteNote}) =>{
     return(
         <div className="notes-list">
             {notes.map((note) =>(
-                 <Notes
+                 <Notes 
                     id={note.id}
+                    key= {note.id}
                     text={note.text}
-                    date={note.date}
+                    date={note.timestamp}
+                    username = {note.username}
                     handleDeleteNote={handleDeleteNote}
             />))}
            

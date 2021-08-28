@@ -1,5 +1,5 @@
 
-const Notes = ({id, text, date, handleDeleteNote})=>{
+const Notes = ({ id,  text, date, handleDeleteNote})=>{
     return ( 
         <div className="note">
             {text}
